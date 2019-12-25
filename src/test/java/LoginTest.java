@@ -64,7 +64,7 @@ public class LoginTest {
     }
 
     @Test
-    void shouldBlockAfterThreeTimesInvalidRequest() throws SQLException {
+    void shouldBlockAfterThreeTimesInvalidPass() throws SQLException {
         open(URL);
         LoginPage loginPage = new LoginPage();
         loginPage.blockSystem();
