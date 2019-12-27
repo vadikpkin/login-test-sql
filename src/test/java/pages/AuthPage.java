@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import static com.codeborne.selenide.Selenide.*;
 
 public class AuthPage {
-    private static final SelenideElement authCode = $("[name='code']");
+    private static final SelenideElement authCode = $(".input__control");
     private static final SelenideElement submitBtn = $("[data-test-id='action-verify']");
     private static final SelenideElement inputSubCode = $(".input__sub");
     private static final SelenideElement errorNotification = $("[data-test-id='error-notification']");
@@ -18,6 +18,7 @@ public class AuthPage {
 
 
     public DashBoardPage setAuthCode() throws SQLException {
+        sleep(1000);
         authCode.setValue(Dao.getAuthCode(Dao.getId(DataHelper.getValidLoginInfo().getLogin())));
         submitBtn.click();
         return new DashBoardPage();
@@ -29,13 +30,14 @@ public class AuthPage {
     }
 
     public void checkDeclineInvalidCode() {
-        authCode.setValue("343431434");
+        authCode.setValue("343444");
         submitBtn.click();
         errorNotification.shouldHave(Condition.visible);
         errorNotificationContent.shouldHave(Condition.text("Неверно указан код! Попробуйте ещё раз."));
     }
 
     public void checkDeclineThreeTimesInvalidLogin() throws SQLException {
+        sleep(1000);
         authCode.setValue(Dao.getAuthCode(Dao.getId(DataHelper.getValidLoginInfo().getLogin())));
         submitBtn.click();
         errorNotification.shouldHave(Condition.visible);

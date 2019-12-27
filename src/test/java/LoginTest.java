@@ -1,6 +1,5 @@
 
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pages.AuthPage;
 import pages.DashBoardPage;
@@ -13,11 +12,6 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class LoginTest {
     private static final String URL = "http://localhost:9999/";
-
-    @BeforeEach
-    void clearAuthCodes() throws SQLException {
-        Dao.clearAuthCodes();
-    }
 
     @AfterAll
     static void clearAll() throws SQLException {
@@ -37,7 +31,7 @@ public class LoginTest {
     void shouldDeclineRequestInvalidInfo() {
         open(URL);
         LoginPage loginPage = new LoginPage();
-        loginPage.loginInvalidInfo("kolya", "password");
+        loginPage.loginCustomInfo("kolya", "password");
     }
 
     @Test
@@ -65,6 +59,7 @@ public class LoginTest {
 
     @Test
     void shouldBlockAfterThreeTimesInvalidPass() throws SQLException {
+        Dao.clearAuthCodes();
         open(URL);
         LoginPage loginPage = new LoginPage();
         loginPage.blockSystem();

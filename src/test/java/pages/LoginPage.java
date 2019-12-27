@@ -22,7 +22,7 @@ public class LoginPage {
         return new AuthPage();
     }
 
-    public void loginInvalidInfo(String loginStr, String passStr) {
+    public void loginCustomInfo(String loginStr, String passStr) {
         login.setValue(loginStr);
         pass.setValue(passStr);
         submitBtn.click();
@@ -37,16 +37,13 @@ public class LoginPage {
 
     public void blockSystem() {
         LoginPage loginPage = new LoginPage();
-        loginPage.loginInvalidInfo("vasya", "qwer");
-        submitBtn.click();
+        loginPage.loginCustomInfo("vasya", "qwer");
         login.setValue("\b\b\b\b\b\b\b\b\b\b");
         pass.setValue("\b\b\b\b\b\b\b\b\b\b");
-        loginPage.loginInvalidInfo("vasya", "qwert");
-        submitBtn.click();
+        loginPage.loginCustomInfo(null, "qwert");
         login.setValue("\b\b\b\b\b\b\b\b\b\b");
         pass.setValue("\b\b\b\b\b\b\b\b\b\b");
-        loginPage.loginInvalidInfo("vasya", "qwerty");
-        submitBtn.click();
+        loginPage.loginCustomInfo(null, "qwerty");
         login.setValue("\b\b\b\b\b\b\b\b\b\b");
         pass.setValue("\b\b\b\b\b\b\b\b\b\b");
     }
